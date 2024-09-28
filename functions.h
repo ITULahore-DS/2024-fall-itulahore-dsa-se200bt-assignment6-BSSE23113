@@ -16,8 +16,7 @@ public:
 
 class Stack
 {
-    Node *head;
-    Node *tail;
+    Node *top;
     int count;
 
 public:
@@ -34,8 +33,7 @@ public:
 
 class Queue
 {
-    Node *head;
-    Node *tail;
+    Node *top;
     int count;
 
 public:
@@ -47,5 +45,6 @@ public:
     void printQueue();
     int size();
     int peek();
+    void clear();
 };
 #endif

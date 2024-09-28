@@ -35,18 +35,17 @@ int Node::getData()
 // constructor
 Stack::Stack()
 {
-    head = nullptr;
-    tail = nullptr;
+    top = nullptr;
     count = -1;
 }
 // destructor
 Stack::~Stack()
 {
 
-    while (head)
+    while (top)
     {
-        Node *temp = head;
-        head = head->getNext();
+        Node *temp = top;
+        top = top->getNext();
         delete temp;
     }
 }
@@ -65,15 +64,14 @@ void Stack::push(int data)
 {
     Node *temp = new Node;
     temp->setData(data);
-    if (head)
+    if (top)
     {
-        temp->setNext(head);
-        head = temp;
+        temp->setNext(top);
+        top = temp;
     }
     else
     {
-        head = temp;
-        tail = temp;
+        top = temp;
     }
     temp = nullptr;
     count++;
@@ -88,8 +86,8 @@ void Stack::pop()
     }
     else
     {
-        Node *temp = head;
-        head = head->getNext();
+        Node *temp = top;
+        top = top->getNext();
         delete temp;
         count--;
     }
@@ -98,20 +96,20 @@ void Stack::pop()
 // get head node
 int Stack::peek()
 {
-    if (!head)
+    if (!top)
     {
         return -1;
     }
-    return head->getData();
+    return top->getData();
 }
 
 // clears stack
 void Stack::clear()
 {
-    while (head)
+    while (top)
     {
-        Node *temp = head;
-        head = head->getNext();
+        Node *temp = top;
+        top = top->getNext();
         delete temp;
     }
     count = -1;
@@ -120,7 +118,7 @@ void Stack::clear()
 // prints stack
 void Stack::printStack()
 {
-    Node *temp = head;
+    Node *temp = top;
     for (int i = 0; i <= count; ++i)
     {
         cout << "[" << i << "]: " << temp->getData() << "\n";
@@ -137,18 +135,17 @@ int Stack::size()
 // constructor
 Queue::Queue()
 {
-    head = nullptr;
-    tail = nullptr;
+    top = nullptr;
     count = -1;
 }
 // destructor
 Queue::~Queue()
 {
 
-    while (head)
+    while (top)
     {
-        Node *temp = head;
-        head = head->getNext();
+        Node *temp = top;
+        top = top->getNext();
         delete temp;
     }
 }
@@ -165,7 +162,7 @@ bool Queue::isEmpty()
 // prints queue
 void Queue::printQueue()
 {
-    Node *temp = head;
+    Node *temp = top;
     for (int i = 0; i <= count; ++i)
     {
         cout << "[" << i << "]: " << temp->getData() << "\n";
@@ -176,17 +173,25 @@ void Queue::printQueue()
 // append data to the Queue
 void Queue::enqueue(int data)
 {
+
     Node *temp = new Node;
     temp->setData(data);
-    if (head)
+    if (top)
     {
+        Node *tail = top;
+        int i = 0;
+        while (i != count)
+        {
+            tail = tail->getNext();
+            i++;
+        }
         tail->setNext(temp);
         tail = temp;
+        tail = nullptr;
     }
     else
     {
-        head = temp;
-        tail = temp;
+        top = temp;
     }
     temp = nullptr;
     count++;
@@ -201,8 +206,8 @@ void Queue::dequeue()
     }
     else
     {
-        Node *temp = head;
-        head = head->getNext();
+        Node *temp = top;
+        top = top->getNext();
         delete temp;
         count--;
     }
@@ -217,9 +222,21 @@ int Queue::size()
 // get head node
 int Queue::peek()
 {
-    if (!head)
+    if (!top)
     {
         return -1;
     }
-    return head->getData();
+    return top->getData();
+}
+
+// clears queue
+void Queue::clear()
+{
+    while (top)
+    {
+        Node *temp = top;
+        top = top->getNext();
+        delete temp;
+    }
+    count = -1;
 }
