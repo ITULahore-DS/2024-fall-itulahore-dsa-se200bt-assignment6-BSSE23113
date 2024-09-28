@@ -46,5 +46,6 @@ public:
     void dequeue();
     void printQueue();
     int size();
+    int peek();
 };
 #endif

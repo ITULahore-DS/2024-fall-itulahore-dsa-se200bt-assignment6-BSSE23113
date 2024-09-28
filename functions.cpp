@@ -213,3 +213,13 @@ int Queue::size()
 {
     return count + 1;
 }
+
+// get head node
+int Queue::peek()
+{
+    if (!head)
+    {
+        return -1;
+    }
+    return head->getData();
+}
