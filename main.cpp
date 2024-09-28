@@ -73,7 +73,7 @@ void Menu()
             cout << "Invalid choice. Please try again." << endl;
         }
         }
-    } while (choice != 7);
+    } while (choice != 8);
 }
 int main()
 {
